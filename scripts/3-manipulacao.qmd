@@ -141,11 +141,18 @@ Podemos reescrever esse código com o pipe. O pipe conecta as operações, passa
 
 - `%>%` é a versão do tidyverse.
 
+
+
 ```{r}
 dados_pnud |> 
   select(ano, uf_sigla,  muni_nm, pop) |> 
   arrange(ano, pop)
 ```
+
+- Atalho: CTRL + SHIFT + M (ou COMMAND + Shift + M no Mac)
+
+- Configurar atalho: Tools -> Global Options -> Code -> Use native pipe operator
+
 
 ## Pausa nos verbos: distinct e unique
 
@@ -154,9 +161,13 @@ Quais são os valores únicos/distintos em uma coluna?
 - A base dados_pnud possui informações referentes à quais anos?
 
 ```{r}
-distinct(dados_pnud, ano)
+# retorna uma tabela
+distinct(dados_pnud, ano) 
+# retorna um vetor
 unique(dados_pnud$ano)
 ```
+
+
 - A base dados_pnud possui informações referentes à quais UFs?
 
 ```{r}
@@ -188,15 +199,20 @@ x == 2
 - Filtrar apenas informações referentes ao ano de 2010:
 
 ```{r}
-dados_pnud %>% 
+dados_pnud |> 
   filter(ano == 2010) 
 ```
 
 - Filtrar apenas informações referentes ao ano de 2010, e que sejam do estado de SP:
 
 ```{r}
-dados_pnud %>% 
+dados_pnud |> 
   filter(ano == 2010, uf_sigla == "SP") 
+
+
+# cuidado com maiúsculas e minúsculas!
+dados_pnud |> 
+  filter(ano == 2010, uf_sigla == "sp")
 ```
 
 - Comparações lógicas:
@@ -259,12 +275,13 @@ x %in% c(2, 3, 4)
 
 Exemplos com filtros:
 
-- Filtrar apenas dados de estados das pessoas participantes do curso:
+- Filtrar apenas dados de estados específicos, por exemplo, São Paulo e Rio de Janeiro:
 
 ```{r}
 dados_pnud |> 
   filter(uf_sigla %in% c("SP", "RJ"))
 ```
+
 
 ### Operadores lógicos - &, | , !
 
@@ -285,13 +302,16 @@ y >= 3 & y <= 7
 
 Exemplos com filtros:
 
-- No filter, a virgula funciona como o &!
+- No filter, a vírgula funciona como o &!
 
 - Filtrar apenas informações referentes ao ano de 2010, e que sejam do estado de SP:
 
 ```{r}
-dados_pnud %>% 
+dados_pnud |> 
   filter(ano == 2010 & uf_sigla == "SP") 
+
+dados_pnud |> 
+  filter(ano == 2010, uf_sigla == "SP") 
 ```
 
 
@@ -317,7 +337,7 @@ Exemplos com filtros:
 - Filtrar informações referentes ao ano de 2010 OUque sejam do estado de SP:
 
 ```{r}
-dados_pnud %>% 
+dados_pnud |> 
   filter(ano == 2010 | uf_sigla == "SP") 
 ```
 
@@ -345,7 +365,7 @@ dados_pnud |>
 
 ### filtros e NA?
 
-- A função filter, por padrão, remove os NAs. Ex:
+- A função filter, por padrão, remove os NAs das colunas que usamos. Ex:
 
 ```{r}
 df <- tibble(x = c(1, 2, 3, NA))
@@ -359,13 +379,31 @@ filter(df, x > 1 | is.na(x))
 
 - E como remover NAs? 
 
+Lembrando da função `is.na()`, que retorna TRUE para os valores NA:
+
 ```{r}
-df %>% 
+df$x
+
+# Quais valores são NA?
+is.na(df$x)
+
+# Quais valores não são NA?
+!is.na(df$x)
+```
+- Podemos usar a função `filter()` para remover os NAs de uma coluna específica:
+
+```{r}
+df |> 
   filter(!is.na(x))
 
 # o código anterior é equivalente à 
-df %>% 
+df |> 
   drop_na(x)
+
+# cuidado: a função drop_na() sem argumentos remove todas as linhas que contenham algum NA
+
+starwars |> 
+  drop_na()
 ```
 
 
@@ -420,26 +458,28 @@ dados_pnud |>
 - Classificar:  A função `ifelse()` é uma ótima ferramenta para fazermos classificação com duas categorias. Ex:
 
 ```{r}
-dados_pnud %>%
+dados_pnud |>
   select(ano, uf_sigla, muni_nm, espvida) |>
-  mutate(maior_que_a_media_espvida  =
-           ifelse(espvida >= mean(dados_pnud$espvida),
-                  "Sim", "Não")) 
+  mutate(
+    media_espvida = mean(dados_pnud$espvida),
+    maior_que_a_media_espvida  =
+      ifelse(espvida >= media_espvida, "Sim", "Não")
+  )
 ```
 
 - Classificar: a função `case_when()` é interessante para fazer classificação com várias categorias. Ex: classificar a coluna de expectativa de vida segundo faixas de idade
 
 ```{r}
-dados_classificados_por_espvida <- dados_pnud %>%
+dados_classificados_por_espvida <- dados_pnud |>
   select(ano, uf_sigla, muni_nm, espvida) |>
   mutate(class_espvida  = case_when(
     espvida >= 50 & espvida < 60 ~ "50 - 59 anos",
     espvida >= 60 & espvida < 70 ~ "60 - 69 anos",
-    espvida >= 70 & espvida < 80 ~ "70 - 79 anos",
+    espvida >= 70 & espvida < 80 ~ "70 - 79 anos"
   ))
 ```
 
-- E como podemos usar esses dados classificados? Vamos aprender uma introdução sobre gráficos na última aula.
+- E como podemos usar esses dados classificados?
 
 ```{r}
 dados_classificados_por_espvida |> 
