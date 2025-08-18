@@ -2,6 +2,7 @@
 title: "Tópico 3 - Manipulação de dados"
 ---
 
+## Parte 1 - Exercício
 
 1) Primeiro, precisamos carregar o pacote tidyverse, que será usado ao longo do script. Carregue aqui também outros pacotes que possa precisar:
 
@@ -36,6 +37,7 @@ Primeiro, recomendo pensar na lógica para gerar essa tabela. Depois, escreva o 
 
 ```
 
+## Parte 2 - Leitura complementar
 
 Sugestão de leitura:
 

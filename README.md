@@ -18,8 +18,7 @@ Para saber de próximos oferecimentos, entre em contato com
 
 ### Slides
 
-- [Slide de apresentação do
-  curso](https://beatrizmilz.github.io/2025-08-cebrap-lab-intro-R/slides/introducao-ao-curso.html#/)
+- [Slide de apresentação do curso](https://beatrizmilz.github.io/2025-08-cebrap-lab-intro-R/slides/introducao-ao-curso.html#/)
 
 
 ### Scripts e exercícios
@@ -31,11 +30,11 @@ Disponíveis no [repositório do GitHub](https://github.com/beatrizmilz/2025-08-
 
 ## Materiais para estudar mais
 
-- [Livro online, gratuito e em Português: Ciência de Dados com
-  R](https://cienciadedatos.github.io/pt-r4ds/)
+- [Livro online, gratuito e em Português: Ciência de Dados com R](https://cienciadedatos.github.io/pt-r4ds/)
 
-- [Livro online e gratuito: Ciência de Dados em
-  R](https://livro.curso-r.com/7-2-dplyr.html)
+- [Livro online e gratuito: Ciência de Dados em R](https://livro.curso-r.com/7-2-dplyr.html)
+  
+- [Material do curso Introdução à análise de dados no R - IPEA](https://ipeadata-lab.github.io/curso_r_intro_202409/)
 
 <!-- - [Slide Curso-R: Introdução ao R](https://curso-r.github.io/main-r4ds-1/slides/02-introducao-ao-r.html#1)  -->
 <!-- - [Slide Curso-R: Importação de dados](https://curso-r.github.io/main-r4ds-1/slides/03-importacao.html#1)  -->
