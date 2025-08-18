@@ -1,0 +1,42 @@
+---
+title: "Tópico 3 - Manipulação de dados"
+---
+
+
+1) Primeiro, precisamos carregar o pacote tidyverse, que será usado ao longo do script. Carregue aqui também outros pacotes que possa precisar:
+
+```{r}
+
+
+```
+
+2) Precisamos carregar a base também: carregue o arquivo `base_pnud_min.csv` e salve no objeto `dados_pnud`.
+
+```{r}
+dados_pnud <- # ....
+```
+
+
+3) Neste exercício, vamos criar uma tabela com as seguintes informações: Soma da população em milhões, no ano de 2010, agrupado por região do Brasil. A tabela deve estar ordenada de forma decrescente segundo a população em milhões. Exemplo do que queremos gerar:
+
+|Região	         |População em milhões (2010)|
+|----------------|---------|
+|Sudeste	       |  79.48  |
+|Nordeste	       |  52.01  |
+|Sul	           |  27.14  |
+|Norte	         |  15.18  |
+|Centro-Oeste	   |  13.84  |
+
+Primeiro, recomendo pensar na lógica para gerar essa tabela. Depois, escreva o código para gerar essa tabela no campo de código abaixo:
+
+```{r}
+
+
+
+
+```
+
+
+Sugestão de leitura:
+
+- <https://pt.r4ds.hadley.nz/data-transform.html>
