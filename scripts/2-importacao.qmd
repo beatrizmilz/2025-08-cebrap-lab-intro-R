@@ -1,0 +1,189 @@
+---
+title: "Tópico 2 - Importação de dados"
+author: "Beatriz"
+date: "`r Sys.Date()`"
+lang: pt
+---
+
+## Importação
+
+- O formato mais comum que utilizamos são os Dataframes.
+
+- Possuem duas dimensões: linhas e colunas.
+
+- Cada colunas pode ser de classes diferentes.
+
+- Pense em uma tabela, como está acostumada a ver no Excel por exemplo. 
+
+- Formatos comuns: CSV, excel, txt, entre outros.
+
+### Caminhos relativos e absolutos
+
+Caminhos de arquivos é um conceito que indica onde um arquivo está localizado no seu computador. Existem dois tipos principais de caminhos:
+
+- Caminho absoluto: é o caminho completo do arquivo no seu computador. Exemplo:
+
+```{r}
+"/Users/beatrizmilz/Documents/CEBRAP/2025-08-cebrap-lab-intro-R/dados/base_pnud_min.csv"
+```
+
+
+- Caminho relativo: é o caminho do arquivo a partir do diretório de trabalho atual. 
+
+  - Quando trabalhamos com projetos do RStudio, o diretório de trabalho é o local onde o arquivo `.Rproj` está localizado. 
+  
+```{r}
+# Exemplo partindo do projeto do RStudio
+"dados/base_pnud_min.csv"
+```
+
+  - PORÉM quando estamos trabalhando com arquivos `.qmd`, o diretório de trabalho é o local onde o arquivo `.qmd` está localizado. Exemplo:
+
+```{r}
+# Exemplo em um arquivo .qmd
+"../dados/base_pnud_min.csv"
+```
+
+No exemplo acima, `..` indica que estamos subindo um nível na hierarquia de pastas, e `dados/base_pnud_min.csv` é o caminho relativo a partir do diretório atual.
+
+**Pacote here**
+
+- O pacote `here` ajuda a lidar com caminhos relativos de forma mais segura. A função `here()` retorna o caminho absoluto, considerando o diretório do projeto `.Rproj`. Então o resultado funciona bem independente de usar arquivos `.R` ou `.qmd`.
+
+
+```{r}
+# install.packages("here")
+library(here)
+arquivo_para_ler <- here("dados/base_pnud_min.csv")
+arquivo_para_ler
+```
+
+
+### Importando CSV
+
+- Importando CSV:
+
+```{r}
+library(readr)
+dados_pnud <- read_csv2("../dados/base_pnud_min.csv")
+```
+
+- Importando excel:
+
+```{r}
+library(readxl)
+pnud_excel <- read_excel("../dados/base_pnud.xlsx")
+```
+
+- Podemos usar o Import dataset do RStudio! O importante é salvar o código no script. Exemplo:
+
+```{r}
+
+```
+
+
+Podemos também importar algumas bases diretamente da URL! 
+Exemplo: Execução orçamentária da PMSP:
+
+<http://orcamento.sf.prefeitura.sp.gov.br/orcamento/execucao.php>
+
+```{r}
+
+```
+
+
+
+Exercício: Importe a base `dicionario_base_pnud_min.csv`:
+
+```{r}
+
+```
+
+## Padronizar nome das colunas
+
+O pacote janitor tem várias funções para limpar bases de dados!
+
+```{r}
+library(janitor)
+
+# exemplo:
+
+# checar nome das colunas da base iris
+names(iris)
+
+# limpar nomes das colunas da base iris, e salvar em um objeto
+# chamado iris_limpa
+iris_limpa <- clean_names(iris)
+
+# checar nome das colunas da base iris_limpa
+names(iris_limpa)
+```
+
+
+## Salvando no computador
+
+- Salvando os dados em um arquivo csv:
+
+```{r}
+write_csv2(dados_pnud, "../dados/salvando_base_pnud.csv")
+```
+
+- Salvando os dados em um arquivo excel:
+
+```{r}
+library(writexl)
+write_xlsx(dados_pnud, "../dados/salvando_base_pnud.xlsx")
+```
+
+Exercício: Salve a base do dicionário dos dados do pnud com outro nome, por exemplo: `dicionario_pnud_output.csv`
+
+```{r}
+
+```
+
+
+## Funções úteis para usar com dataframes
+
+```{r}
+# Retorna o número de colunas 
+ncol(dados_pnud)
+
+# Retorna o número de linhas
+nrow(dados_pnud)
+
+# Retorna o número de colunas e linhas
+dim(dados_pnud)
+
+# primeiras linhas
+head(dados_pnud)
+
+# dar uma "olhada" na base
+library(dplyr)
+glimpse(dados_pnud)
+```
+
+
+- Exercícios: Explore a base do dicionário do pnud. Quantas colunas tem? Quantas linhas tem? Quais informações essa pequena base apresenta?
+
+```{r}
+
+```
+
+
+
+- Para selecionar colunas, utilize o `$`. Elas retornarão como vetores, e poderemos usar as funções que já conhecemos. Ex: `dados_pnud$ano`.
+
+
+- Dica: após escrever o `nome_do_dataframe$`, aperte `tab` para que o RStudio faça sugestões de colunas da base.
+
+- A função `unique()` retorna os valores únicos de um vetor. Exemplo: 
+
+```{r}
+unique(dados_pnud$ano)
+```
+
+Exercício: Use a função aprendida para criar um vetor com as siglas dos estados do Brasil.
+
+```{r}
+
+```

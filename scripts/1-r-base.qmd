@@ -243,14 +243,21 @@ Várias funções possuem o argumento `na.rm = TRUE`, que indica que os valores 
 ```{r}
 # argumento na.rm = TRUE
 sum(vetor_com_na, na.rm = TRUE)
-mean(vetor_com_na, na.rm = TRUE)
-median(vetor_com_na, na.rm = TRUE)
-sd(vetor_com_na, na.rm = TRUE)
-var(vetor_com_na, na.rm = TRUE)
-min(vetor_com_na, na.rm = TRUE)
-max(vetor_com_na, na.rm = TRUE)
 ```
 
+### Funções básicas
+
+|  Função |  O que retorna? |
+|--:|--:|
+|  `sum()` |  Soma  | 
+|  `mean()` |  Média |
+|  `median()` |  Mediana |
+|  `var()` |  Variância (simples) |
+|  `sd()` |  Desvio Padrão |
+|  `max()` |  Valor máximo  |
+|  `min()` |  Valor mínimo |
+|  `round()` |  Valor arredondado |
+|  `sqrt()` |  Raíz quadrada |
 
 ### Exercício
 
