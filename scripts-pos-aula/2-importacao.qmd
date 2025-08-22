@@ -235,16 +235,63 @@ dim(dados_pnud)
 # primeiras linhas
 head(dados_pnud)
 
+
+names(dados_pnud)
+
 # dar uma "olhada" na base
-library(dplyr)
+library(tidyverse)
 glimpse(dados_pnud)
+
+# Comentário: CTRL - SHIFT - C
+# Rows: 16,686
+# Columns: 15
+# $ ano       <dbl> 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991…
+# $ muni_id   <dbl> 1100015, 1100023, 1100031, 1100049, 1100056, 1100064…
+# $ muni_nm   <chr> "ALTA FLORESTA D'OESTE", "ARIQUEMES", "CABIXI", "CAC…
+# $ uf_sigla  <chr> "RO", "RO", "RO", "RO", "RO", "RO", "RO", "RO", "RO"…
+# $ regiao_nm <chr> "Norte", "Norte", "Norte", "Norte", "Norte", "Norte"…
+# $ idhm      <dbl> 0.329, 0.432, 0.309, 0.407, 0.386, 0.376, 0.203, 0.4…
+# $ idhm_e    <dbl> 0.112, 0.199, 0.108, 0.171, 0.167, 0.151, 0.039, 0.2…
+# $ idhm_l    <dbl> 0.617, 0.684, 0.636, 0.667, 0.629, 0.658, 0.572, 0.6…
+# $ idhm_r    <dbl> 0.516, 0.593, 0.430, 0.593, 0.547, 0.536, 0.373, 0.5…
+# $ espvida   <dbl> 62.01, 66.02, 63.16, 65.03, 62.73, 64.46, 59.32, 62.…
+# $ rdpc      <dbl> 198.46, 319.47, 116.38, 320.24, 240.10, 224.82, 81.3…
+# $ gini      <dbl> 0.63, 0.57, 0.70, 0.66, 0.60, 0.62, 0.59, 0.65, 0.63…
+# $ pop       <dbl> 22835, 55018, 5846, 66534, 19030, 25070, 10737, 6902…
+# $ lat       <dbl> -11.929, -9.913, -13.492, -11.438, -13.189, -13.117,…
+# $ lon       <dbl> -61.996, -63.041, -60.545, -61.448, -60.812, -60.542…
+
+# 21/08/2025
+# 2025-08-21
+
+
+# Rows: 16,686
+# Columns: 15
+# $ ano       <dbl> 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991…
+# $ muni_id   <dbl> 1100015, 1100023, 1100031, 1100049, 1100056, 1100064…
+# $ muni_nm   <chr> "ALTA FLORESTA D'OESTE", "ARIQUEMES", "CABIXI", "CAC…
+# $ uf_sigla  <chr> "RO", "RO", "RO", "RO", "RO", "RO", "RO", "RO", "RO"…
+# $ regiao_nm <chr> "Norte", "Norte", "Norte", "Norte", "Norte", "Norte"…
+# $ idhm      <dbl> 0.329, 0.432, 0.309, 0.407, 0.386, 0.376, 0.203, 0.4…
+# $ idhm_e    <dbl> 0.112, 0.199, 0.108, 0.171, 0.167, 0.151, 0.039, 0.2…
+# $ idhm_l    <dbl> 0.617, 0.684, 0.636, 0.667, 0.629, 0.658, 0.572, 0.6…
+# $ idhm_r    <dbl> 0.516, 0.593, 0.430, 0.593, 0.547, 0.536, 0.373, 0.5…
+# $ espvida   <dbl> 62.01, 66.02, 63.16, 65.03, 62.73, 64.46, 59.32, 62.…
+# $ rdpc      <dbl> 198.46, 319.47, 116.38, 320.24, 240.10, 224.82, 81.3…
+# $ gini      <dbl> 0.63, 0.57, 0.70, 0.66, 0.60, 0.62, 0.59, 0.65, 0.63…
+# $ pop       <dbl> 22835, 55018, 5846, 66534, 19030, 25070, 10737, 6902…
+# $ lat       <dbl> -11.929, -9.913, -13.492, -11.438, -13.189, -13.117,…
+# $ lon       <dbl> -61.996, -63.041, -60.545, -61.448, -60.812, -60.542…
+
+
+summary(dados_pnud)
 ```
 
 
 - Exercícios: Explore a base do dicionário do pnud. Quantas colunas tem? Quantas linhas tem? Quais informações essa pequena base apresenta?
 
 ```{r}
-
+# fazer depois
 ```
 
 
@@ -252,16 +299,38 @@ glimpse(dados_pnud)
 - Para selecionar colunas, utilize o `$`. Elas retornarão como vetores, e poderemos usar as funções que já conhecemos. Ex: `dados_pnud$ano`.
 
 
+```{r}
+# dados_pnud$pop
+```
+
+
 - Dica: após escrever o `nome_do_dataframe$`, aperte `tab` para que o RStudio faça sugestões de colunas da base.
+
+```{r}
+# dados_pnud$idhm_l
+```
+
 
 - A função `unique()` retorna os valores únicos de um vetor. Exemplo: 
 
 ```{r}
 unique(dados_pnud$ano)
+unique(dados_pnud$regiao_nm)
+
+# NORTE, norte, Norte?
+# Centro oeste? Centro-oeste? 
+
+# dados_pnud$regiao_nm
+# dados_pnud$idhm
+unique(dados_pnud$idhm)
 ```
 
 Exercício: Use a função aprendida para criar um vetor com as siglas dos estados do Brasil.
 
 ```{r}
+unique(dados_pnud$uf_sigla)
+sort(unique(dados_pnud$uf_sigla))
+# sort()
 
+dados_pnud
 ```
